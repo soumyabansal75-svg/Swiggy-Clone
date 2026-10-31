@@ -3,36 +3,15 @@
 A pixel-perfect, fully responsive web clone of the Swiggy home landing page built from scratch. This project was developed to practice semantic HTML structures, advanced CSS layout systems, pixel-accurate spacing, and polished front-end styling.
 
 ## 📸 Screenshots
-
-To add screenshots to this README, save the image files inside a folder such as `screenshots/` or `assets/screenshots/` in the project root, then reference them with relative paths.
-
-Example:
-
-```md
 ## Home Page
-![Swiggy Home Page](./screenshots/home-page.png)
+![Swiggy Home Page](.home-page.png)
 
 ## Food Categories
-![Food Categories](./screenshots/food-categories.png)
-```
+![Food Categories](.food-categories.png)
 
-You can also add multiple images in a gallery layout:
+## Groceries
+![Groceries @ Instamart](.groceries.png)
 
-```md
-<div align="center">
-  <img src="./screenshots/home-page.png" alt="Swiggy home page" width="800" />
-  <img src="./screenshots/food-categories.png" alt="Food categories" width="800" />
-</div>
-```
-
-### How to capture screenshots
-1. Open the project in your browser.
-2. Run the app locally using your usual setup.
-3. Resize the browser to a desktop width for the landing page.
-4. Take a screenshot and save it as a `.png` file.
-5. Put it in `screenshots/` and commit it to the repo.
-
----
 
 ## 🚀 Key Visual & Functional Features
 
