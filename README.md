@@ -4,13 +4,14 @@ A pixel-perfect, fully responsive web clone of the Swiggy home landing page buil
 
 ## 📸 Screenshots
 ## Home Page
-![Swiggy Home Page](.home-page.png)
+![Swiggy Clone Preview](home-page.png)
+
 
 ## Food Categories
-![Food Categories](.food-categories.png)
+![Food Categories](food-categories.png)
 
 ## Groceries
-![Groceries @ Instamart](.groceries.png)
+![Groceries @ Instamart](groceries.png)
 
 
 ## 🚀 Key Visual & Functional Features
