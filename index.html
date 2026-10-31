@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiggy Clone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Gilroy, arial, Helvetica Neue, sans-serif;
+            padding-top: 150px;
+        }
+
+        nav {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 60px;
+            height: 150px;
+            position: fixed;
+            width: 100%;
+            top: 0px;
+            background: rgb(248, 91, 33);
+            z-index: 10;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .items {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            color: aliceblue;
+            font-size: large;
+        }
+
+        .signin {
+            background-color: black;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .getapp {
+            border: 1px solid white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .hero {
+            height: calc(100vh - 150px);
+            background-color: rgb(248, 91, 33);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 60px;
+            position: relative;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 900px;
+            padding: 0 20px;
+            gap: 40px; 
+        }
+        .input-row {
+            display: flex;
+            width: 100%;
+            gap: 15px;
+        }
+        .input-sec1 input,
+        .input-sec2 input {
+            width: 100%;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 16px 20px;
+            border-radius: 15px;
+            border: none;
+            outline: none;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .input-sec1{
+            flex: 1;
+        }
+        .input-sec2{
+            flex: 2;
+        }
+        .image1 {
+            position: absolute;
+            left: 0;
+            top: 60px
+        }
+
+        .image1 img{
+            max-width: 250px; 
+            display: block;
+        }
+        .image2 {
+            position: absolute;
+            right: 0;
+            top: 60px; 
+        }
+
+        .image2 img {
+            max-width: 250px; 
+            display: block;
+        }
+        .features-container {
+            display: flex;
+            width: 100%;
+            gap: 24px;
+            margin-top: 40px;
+            z-index: 2;
+        }
+        .feature-card {
+            flex: 1;
+            background-color: white;
+            border-radius: 24px;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 240px;
+            box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-info h2 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1c1c1c;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .feature-info p {
+            font-size: 14px;
+            color: #686b78;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .feature-info .discount {
+            font-size: 13px;
+            color: #fc8019; 
+            font-weight: 700;
+            margin-top: 12px;
+            text-transform: uppercase;
+        }
+        .explore-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #fc8019;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-top: 24px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+        }
+        .feature-card img {
+            width: 160px;
+            height: auto;
+            object-fit: contain;
+        }
+        .food-options-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .section-header h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #02060c;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-arrows {
+            display: flex;
+            gap: 8px;
+        }
+
+        .arrow {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            color: #02060c;
+            user-select: none;
+        }
+        .food-grid {
+            display: flex;
+            flex-direction: column;  
+            flex-wrap: wrap;       
+            height: 420px;          
+            gap: 24px 36px;         
+            overflow-x: auto;       
+            padding-bottom: 15px;
+            scrollbar-width: none; 
+        }
+
+        .food-grid::-webkit-scrollbar {
+            display: none; 
+        }
+
+        .food-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            width: 140px; 
+        }
+
+        .food-item img {
+            width: 140px;
+            height: 140px;
+            object-fit: contain;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .food-item:hover img {
+            transform: scale(1.05); 
+        }
+
+        .food-item span {
+            margin-top: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #3e4152;
+        }
+                .grocery-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+
+        .grocery-grid {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+            scrollbar-width: none;
+        }
+
+        .grocery-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .grocery-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            width: 160px;
+        }
+
+        .grocery-img-box {
+            background-color: #f4f4f5;
+            border-radius: 16px;
+            width: 160px;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .grocery-item:hover .grocery-img-box {
+            transform: scale(1.04);
+        }
+
+        .grocery-img-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .grocery-item span {
+            margin-top: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #282c3f;
+            line-height: 1.3;
+        }
+                .app-banner-section {
+            max-width: 1200px;
+            margin: 60px auto 20px auto;
+            padding: 0 40px;
+        }
+
+        .app-banner-section img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+                .cities-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+
+        .cities-section h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #02060c;
+            margin-bottom: 24px;
+            letter-spacing: -0.3px;
+        }
+
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .city-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #3e4152;
+            cursor: pointer;
+            background-color: white;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .city-card:hover {
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .city-card.show-more {
+            color: #fc8019;
+            font-weight: 700;
+            gap: 8px;
+        }
+                footer {
+            background-color: #02060c;
+            color: rgba(255, 255, 255, 0.6);
+            padding: 60px 40px;
+            font-family: Gilroy, arial, sans-serif;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-brand {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand-logo img {
+            width: 32px;
+            height: 32px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .footer-subcolumn {
+            margin-bottom: 30px;
+        }
+                .footer-bottom-bar {
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-legal-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .footer-legal-links a:hover {
+            color: white;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-social-icons a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            opacity: 0.6;
+            transition: opacity 0.2s ease;
+        }
+
+        .footer-social-icons a:hover {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="logo">
+            <img src="https://media-assets.swiggy.com/fl_lossy,f_auto,q_auto,w_96,h_96/portal/m/logo_192x192.png" alt="Swiggy Logo">
+            <span>Swiggy</span>
+        </div>
+        <div class="items">
+            <div><b>Swiggy Corporate</b></div>
+            <div><b>Partner with us</b></div>
+            <div class="getapp"><b>Get the app↗</b></div>
+            <div class="signin"><b>Sign in</b></div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="hero">
+            <div class="hero-content">
+                <div class="input-row">
+                <div class="input-sec1">
+                    <input type="text" placeholder="📍 Enter your location" />
+                </div>
+                <div class="input-sec2">
+                    <input type="text" placeholder="Search for restaurant, item or more" />
+                </div>
+                </div>
+                <div class="features-container">
+                    <div class="feature-card">
+                        <div class="feature-info">
+                            <h2>Food Delivery</h2>
+                            <p>FROM RESTAURANTS</p>
+                            <div class="discount">UPTO 60% OFF</div>
+                            <button class="explore-btn">Explore →</button>
+                        </div>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAYtppz4rOLj00A4C4pkeNVVTEY8MlVhoAVWlOkGTWXw&s=10" alt="Food Delivery plate">
+                    </div>
+                     <div class="feature-card">
+                        <div class="feature-info">
+                            <h2>Instamart</h2>
+                            <p>INSTANT GROCERY</p>
+                            <div class="discount">UPTO 60% OFF</div>
+                            <button class="explore-btn">Explore →</button>
+                        </div>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb1xoyQD3pFjq3oIs6c15UhhS3L-ozlQF8Mo4MP6fWpg&s=10" alt="Instamart grocery box bag">
+                    </div>
+                </div>
+
+                <div class="image1">
+                    <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/portal/testing/seo-home/Veggies_new.png" alt="" />
+                </div>
+                <div class="image2">
+                    <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/portal/testing/seo-home/Sushi_replace.png" alt="" />
+                </div>
+            </div>
+        </div>
+    </main>
+    <section class="food-options-section">
+        <div class="section-header">
+            <h2>Order our best food options</h2>
+            <div class="nav-arrows">
+                <div class="arrow">←</div>
+                <div class="arrow">→</div>
+            </div>
+        </div>
+
+        <div class="food-grid">
+            <div class="food-item">
+                <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/PC_Mweb/North%20Indian.png" alt="North Indian">
+                <span>North Indian</span>
+            </div>
+            <div class="food-item">
+                <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/PC_Mweb/Biryani.png" alt="Biryani">
+                <span>Biryani</span>
+            </div>
+            <div class="food-item">
+                <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/PC_Mweb/Burger.png" alt="Burger">
+                <span>Burger</span>
+            </div>
+            <div class="food-item">
+                <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/PC_Mweb/Pizza.png" alt="Pizza">
+                <span>Pizza</span>
+            </div>
+            <div class="food-item">
+                <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/PC_Mweb/Cake.png" alt="Cake">
+                <span>Cake</span>
+            </div>
+            <div class="food-item">
+                <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/PC_Mweb/Rolls.png" alt="Rolls">
+                <span>Rolls</span>
+            </div>
+            <div class="food-item">
+                <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/PC_Mweb/Pasta.png" alt="Pasta">
+                <span>Pasta</span>
+            </div>
+            <div class="food-item">
+                <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/PC_Mweb/Chinese.png" alt="Chinese">
+                <span>Chinese</span>
+            </div>
+            <div class="food-item">
+                <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/PC_Mweb/South%20Indian.png" alt="South Indian">
+                <span>South Indian</span>
+            </div>
+            <div class="food-item">
+                <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/PC_Mweb/Chole%20Bhature.png" alt="Chole Bhature">
+                <span>Chole Bhature</span>
+            </div>
+        </div>
+    </section>
+        <section class="grocery-section">
+        <div class="section-header">
+            <h2>Shop groceries on Instamart</h2>
+            <div class="nav-arrows">
+                <div class="arrow">←</div>
+                <div class="arrow">→</div>
+            </div>
+        </div>
+
+        <div class="grocery-grid">
+            <div class="grocery-item">
+                <div class="grocery-img-box">
+                    <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/NI_CATALOG/IMAGES/CIW/2025/5/14/43e3c412-4ca9-4894-82ba-24b69da80aa6_06c0d2a9-804c-4bf1-8725-7ebd234e144a" alt="Fresh Vegetables">
+                </div>
+                <span>Fresh Vegetables</span>
+            </div>
+
+            <div class="grocery-item">
+                <div class="grocery-img-box">
+                    <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/NI_CATALOG/IMAGES/CIW/2025/5/14/a1493d81-f21e-415f-9875-f78383590fc2_9f3f0f68-4fbe-40f6-8f5d-5472a03469bd" alt="Fresh Fruits">
+                </div>
+                <span>Fresh Fruits</span>
+            </div>
+
+            <div class="grocery-item">
+                <div class="grocery-img-box">
+                    <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/NI_CATALOG/IMAGES/CIW/2025/5/14/6dea6676-ce07-45e6-b60c-a099c01c5462_6d33297a-5828-48ff-aa2a-c052ae97669e" alt="Dairy, Bread & Eggs">
+                </div>
+                <span>Dairy, Bread and Eggs</span>
+            </div>
+
+            <div class="grocery-item">
+                <div class="grocery-img-box">
+                    <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/NI_CATALOG/IMAGES/CIW/2025/5/14/097900ca-5d2d-4bb0-8e54-aede1e58dfd8_eab3796c-ac17-48fd-bfc7-6356c6f89783" alt="Rice, Atta & Dals">
+                </div>
+                <span>Rice, Atta and Dals</span>
+            </div>
+
+            <div class="grocery-item">
+                <div class="grocery-img-box">
+                    <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/NI_CATALOG/IMAGES/CIW/2025/5/14/64714677-e6b6-41c1-b533-6644d43e55f7_76ef86af-0483-41a5-8387-37901bf4ca6a" alt="Masalas & Dry Fruits">
+                </div>
+                <span>Masalas and Dry Fruits</span>
+            </div>
+
+            <div class="grocery-item">
+                <div class="grocery-img-box">
+                    <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/NI_CATALOG/IMAGES/CIW/2025/5/14/8e48ee13-3b51-49ea-b765-5cf3e7a97c04_695caa8a-c2f6-4a1a-9672-53213fea21aa" alt="Oils & Ghee">
+                </div>
+                <span>Oils and Ghee</span>
+            </div>
+        </div>
+    </section>
+        <section class="app-banner-section">
+        <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/portal/m/seo/App_download_banner.png" alt="Get the Swiggy App now!">
+    </section>
+        <section class="cities-section">
+        <h2>Cities with food delivery</h2>
+        <div class="cities-grid">
+            <div class="city-card">Order food online in Bangalore</div>
+            <div class="city-card">Order food online in Gurgaon</div>
+            <div class="city-card">Order food online in Hyderabad</div>
+            <div class="city-card">Order food online in Delhi</div>
+            <div class="city-card">Order food online in Mumbai</div>
+            <div class="city-card">Order food online in Pune</div>
+            <div class="city-card">Order food online in Kolkata</div>
+            <div class="city-card">Order food online in Chennai</div>
+            <div class="city-card">Order food online in Ahmedabad</div>
+            <div class="city-card">Order food online in Chandigarh</div>
+            <div class="city-card">Order food online in Jaipur</div>
+            <div class="city-card show-more">Show More ∨</div>
+        </div>
+    </section>
+        <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-brand-logo">
+                    <img src="https://media-assets.swiggy.com/portal/m/logo_192x192.png" alt="Swiggy Logo">
+                    <span>Swiggy</span>
+                </div>
+                <p>© 2026 Swiggy Limited</p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Swiggy Corporate</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Swiggy One</a></li>
+                    <li><a href="#">Swiggy Instamart</a></li>
+                    <li><a href="#">Swiggy Dineout</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Contact us</h3>
+                <ul>
+                    <li><a href="#">Help & Support</a></li>
+                    <li><a href="#">Partner with us</a></li>
+                    <li><a href="#">Ride with us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <div class="footer-subcolumn">
+                    <h3>Available in:</h3>
+                    <ul>
+                        <li><a href="#">Bangalore</a></li>
+                        <li><a href="#">Gurgaon</a></li>
+                        <li><a href="#">Hyderabad</a></li>
+                        <li><a href="#">Delhi</a></li>
+                        <li><a href="#">Mumbai</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Life at Swiggy</h3>
+                <ul>
+                    <li><a href="#">Explore with us</a></li>
+                    <li><a href="#">Swiggy News</a></li>
+                    <li><a href="#">Snackables</a></li>
+                </ul>
+            </div>
+        </div>
+                
+        <div class="footer-bottom-bar">
+            <div class="footer-legal-links">
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Cookie Policy</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Investor Relations</a>
+            </div>
+            
+            <div class="footer-social-icons">
+                <a href="#" aria-label="Facebook">🌐</a>
+                <a href="#" aria-label="Instagram">📸</a>
+                <a href="#" aria-label="Twitter">🐦</a>
+                <a href="#" aria-label="LinkedIn">💼</a>
+            </div>
+        </div>
+
+    </footer>
+
+
+
+
+</body>
+</html>
