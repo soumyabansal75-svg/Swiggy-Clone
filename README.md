@@ -2,7 +2,8 @@
 
 A pixel-perfect, fully responsive web clone of the Swiggy home landing page built from scratch. This project was developed to practice semantic HTML structures, advanced CSS layout systems, pixel-accurate alignment, and layering mechanics.
 
-Live Demo Link: 👉https://github.io
+Live Demo Link: Live Demo Link: [👉 Click Here to View Live](https://github.io)
+
  
 
 ---
